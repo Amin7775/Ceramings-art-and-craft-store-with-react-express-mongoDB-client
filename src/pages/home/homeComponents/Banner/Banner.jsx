@@ -47,17 +47,15 @@ const Banner = () => {
           >
             <div className="absolute h-full w-full bg-black opacity-30"></div>
             <div className="flex flex-col items-center justify-center h-full ">
-              <p className="max-w-[50%] mx-auto text-slate-200  text-xl lg:text-2xl font-semibold drop-shadow-lg mb-3 lg:mb-5">
+              <p className="max-w-[80%] md:max-w-[50%] mx-auto text-slate-200  text-xl lg:text-2xl font-semibold drop-shadow-lg mb-3 lg:mb-5 text-center">
                 DISCOVER THE ARTISTRY OF
               </p>
-              <h1 className="text-white text-4xl lg:text-7xl font-bold drop-shadow-md stroke-black text-center">
+              <h1 className="max-w-[80%] text-white text-3xl lg:text-7xl font-bold drop-shadow-md stroke-black text-center">
                 HANDCRAFTED POTTERY
               </h1>
 
               <p className="max-w-[80%] lg:max-w-[50%] mx-auto text-slate-200   text-lg lg:text-xl drop-shadow-lg mt-5 lg:mt-8 text-center">
-                Experience the artistry of handcrafted pottery. Each piece is a
-                unique masterpiece crafted with passion and skill. Elevate your
-                space with timeless elegance
+                Where each piece is a unique masterpiece crafted with passion and skill.
               </p>
             </div>
           </div>
@@ -77,10 +75,10 @@ const Banner = () => {
           >
             <div className="absolute h-full w-full bg-black opacity-30"></div>
             <div className="flex flex-col items-center justify-center h-full ">
-              <p className="max-w-[50%] mx-auto text-slate-200   text-xl lg:text-2xl font-semibold drop-shadow-lg mb-3 lg:mb-5 text-center">
+              <p className="md:max-w-[50%] mx-auto text-slate-200   text-xl lg:text-2xl font-semibold drop-shadow-lg mb-3 lg:mb-5 text-center">
                 THE PERFECT PORTRAYAL OF
               </p>
-              <h1 className="text-white text-4xl lg:text-7xl font-bold drop-shadow-md   stroke-black text-center">
+              <h1 className="text-white text-3xl lg:text-7xl font-bold drop-shadow-md   stroke-black text-center">
                 ELEGANT CRAFTWORK
               </h1>
 
@@ -108,7 +106,7 @@ const Banner = () => {
               <p className="max-w-[50%] mx-auto text-slate-200   text-xl lg:text-2xl font-semibold drop-shadow-lg mb-3 lg:mb-5">
                 FIND YOUR STYLE
               </p>
-              <h1 className="text-white text-4xl lg:text-6xl font-bold drop-shadow-md   stroke-black text-center">
+              <h1 className="max-w-[80%] text-white text-3xl lg:text-6xl font-bold drop-shadow-md   stroke-black text-center">
                 DEFINE YOUR SPACE WITH POTTERY
               </h1>
             </div>
