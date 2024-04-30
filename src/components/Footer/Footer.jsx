@@ -5,7 +5,7 @@ import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <div className="bg-custom-color-2 py-20">
+    <div className="bg-custom-color-2 pt-20 pb-10">
       {/* links container */}
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5  mb-5 px-5">
         {/* store information */}
@@ -117,7 +117,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <hr />
+      <div className="border-b-2 border-[#323232]"></div>
       <div className="pt-5">
         <p className="text-center text-gray-300">© 2024 Ceramigs. All rights reserved.  </p>
       </div>
