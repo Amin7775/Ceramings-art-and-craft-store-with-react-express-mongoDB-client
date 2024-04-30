@@ -8,6 +8,7 @@ import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
 import PrivateRoute from "./PrivateRoute";
 import ViewDetails from "../pages/viewDetails/ViewDetails";
+import UpdatePage from "../pages/UpdatePage/UpdatePage";
 
 const router = createBrowserRouter([
     {
@@ -41,8 +42,13 @@ const router = createBrowserRouter([
         },
         {
           path: `/allitems/:id`,
-          element: <ViewDetails></ViewDetails>,
+          element: <PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
           loader: ({params})=>fetch(`http://localhost:5000/allitems/${params.id}`)
+        },
+        {
+          path:`/update/:id`,
+          element: <PrivateRoute><UpdatePage></UpdatePage></PrivateRoute>,
+          loader: ({params}) => fetch(`http://localhost:5000/allitems/${params.id}`)
         }
       ]
     },
