@@ -19,7 +19,8 @@ const router = createBrowserRouter([
         },
         {
           path: '/allitems',
-          element: <AllItems></AllItems>
+          element: <AllItems></AllItems>,
+          loader: ()=>fetch('http://localhost:5000/allitems')
         },
         {
           path: '/additem',

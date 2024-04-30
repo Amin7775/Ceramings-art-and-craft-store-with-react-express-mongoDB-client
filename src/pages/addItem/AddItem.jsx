@@ -3,13 +3,6 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const AddItem = () => {
-  const [subCategories, setSubCategories] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:5000/subCategories")
-      .then((res) => res.json())
-      .then((data) => setSubCategories(data));
-  }, []);
   const { user } = useContext(AuthContext);
   const {
     register,
@@ -21,9 +14,23 @@ const AddItem = () => {
   const onSubmit = (data) => {
     const formData = data;
     console.log(formData);
-    //   validatePassword(password);
+
+    fetch(
+      "http://localhost:5000/allitems",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {console.log(data)
+      window.location.reload()
+      });
   };
-  console.log("insider");
+  // console.log("insider");/
 
   return (
     <div className="min-h-screen bg-[#F4EDE8] pb-12">
@@ -65,7 +72,10 @@ const AddItem = () => {
                     <label className="text-black opacity-80 text-xl">
                       Subcategory Name
                     </label>
-                    <select className="border px-5 py-2 rounded-lg bg-[#F5F5F5] text-xl" {...register("subcategory_Name")}>
+                    <select
+                      className="border px-5 py-2 rounded-lg bg-[#F5F5F5] text-xl"
+                      {...register("subcategory_Name")}
+                    >
                       <option value="Clay-made pottery">
                         Clay-made pottery
                       </option>

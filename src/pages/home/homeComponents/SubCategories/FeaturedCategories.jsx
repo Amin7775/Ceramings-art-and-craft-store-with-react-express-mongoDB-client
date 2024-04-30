@@ -15,7 +15,7 @@ const FeaturedCategories = () => {
     return (
         <div className="pb-16">
             <div>
-            <CommonTitle text={"Featured Categories"}></CommonTitle>
+            <CommonTitle text={"Featured Categories"} descirption={"Check out our featured categories"}></CommonTitle>
             </div>
             {/* featurd slider */}
             <div className="mt-10">
