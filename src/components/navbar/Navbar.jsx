@@ -1,14 +1,52 @@
-import { Link, NavLink } from "react-router-dom";
-import './Navbar.css'
+import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
+import "./Navbar.css";
+import { useContext } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
-
-    const links = <>
-        <li><NavLink to={'/'}>Home</NavLink></li>
-        <li><NavLink to={'/allitems'}>Items</NavLink></li>
-        <li><NavLink to={'/additem'}>Add item</NavLink></li>
-        <li><NavLink to={'/mylist'}>My list</NavLink></li>
+  const { user,logOut } = useContext(AuthContext);
+  const navigate = useNavigate()
+  const links = (
+    <>
+      <li>
+        <NavLink to={"/"}>Home</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/allitems"}>Items</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/additem"}>Add item</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/mylist"}>My list</NavLink>
+      </li>
     </>
+  );
+
+  const handleLogOut = () =>{
+    Swal.fire({
+      title: "Confirm logout?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Logged Out!",
+          text: "Redirecting to the home page",
+          icon: "success"
+        })
+        .then(()=>{
+          logOut()
+          navigate('/')
+        })
+      }
+    });
+  }
   return (
     <div className="navbar bg-base-100 drop-shadow-md sticky py-4">
       <div className="navbar-start">
@@ -30,27 +68,48 @@ const Navbar = () => {
             </svg>
           </div>
           <ul
-          id="sidebar"
+            id="sidebar"
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-2xl md:text-4xl font-bold">CERAMINGS</a>
+        <a className="btn btn-ghost text-2xl md:text-4xl font-bold">
+          CERAMINGS
+        </a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 text-lg font-medium" id="sidebar">
-        {links}
+        <ul
+          className="menu menu-horizontal px-1 text-lg font-medium"
+          id="sidebar"
+        >
+          {links}
         </ul>
       </div>
       <div className="navbar-end flex gap-1">
-        <Link to={'/login'}>
-        <p className="btn bg-custom-color-1 text-white hover:bg-custom-color-1/[.9] px-4 md:px-6 lg:px-10 md:text-lg">Login</p>
-        </Link>
-        <Link to={'/register'}>
-        <p className="btn bg-custom-color-1 text-white hover:bg-custom-color-1/[.9] px-4 md:px-6 lg:px-10 md:text-lg">Register</p>
-        </Link>
+        {user ? (
+          <>
+            <Link to={"/login"}>
+              <p onClick={handleLogOut} className="btn bg-custom-color-1 text-white hover:bg-custom-color-1/[.9] px-4 md:px-6 lg:px-10 md:text-lg">
+                Logout
+              </p>
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link to={"/login"}>
+              <p className="btn bg-custom-color-1 text-white hover:bg-custom-color-1/[.9] px-4 md:px-6 lg:px-10 md:text-lg">
+                Login
+              </p>
+            </Link>
+            <Link to={"/register"}>
+              <p className="btn bg-custom-color-1 text-white hover:bg-custom-color-1/[.9] px-4 md:px-6 lg:px-10 md:text-lg">
+                Register
+              </p>
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

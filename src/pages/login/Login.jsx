@@ -4,27 +4,18 @@ import { FaGithub, FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import LoginTopText from "./loginComponents/LoginTopText";
 import { AuthContext } from "../../provider/AuthProvider";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const { loginUser, googleSignin ,githubLogin} =
     useContext(AuthContext);
-  // validate Pw
-  // const validatePassword = (password) => {
-  //   Regular expressions to check for uppercase, lowercase, and minimum length
-  //   const uppercaseRegex = /[A-Z]/;
-  //   const lowercaseRegex = /[a-z]/;
-  //   const lengthRegex = /.{6,}/;
 
-  //   if (!uppercaseRegex.test(password)) {
-  //     return toast("Password must contain at least one uppercase letter.");
-  //   } else if (!lowercaseRegex.test(password)) {
-  //     return toast("Password must contain at least one lowercase letter.");
-  //   } else if (!lengthRegex.test(password)) {
-  //     return toast("Password must be at least 6 characters long.");
-  //   }
-  // };
+  const location = useLocation()
+  const navigate = useNavigate()
+  
 
   const {
     register,
@@ -38,22 +29,79 @@ const Login = () => {
     const password = data.password;
 
     console.log( email, password);
-    //   validatePassword(password);
+      
     loginUser(email,password)
-    .then(res => console.log(res.user))
-    .catch(error => console.log(error.message))
+    .then(res => {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Login Success",
+        showConfirmButton: false,
+        timer: 1500
+      }).then(()=>{
+        navigate(location?.state ? location.state : '/')
+      })
+    })
+    .catch(error => {
+      Swal.fire({
+        position: "center",
+        icon: "Error",
+        title: "We couldn't login",
+        text: `Error : ${error.message}`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    })
   };
   const handleGoogleLogin = () =>{
     console.log("Clicked")
     googleSignin()
-    .then(res=>console.log(res))
-    .catch((error) => console.log(error.message))
+    .then(res=>{
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Login Success",
+        showConfirmButton: false,
+        timer: 1500
+      }).then(()=>{
+        navigate(location?.state ? location.state : '/')
+      })
+    })
+    .catch((error) =>{
+      Swal.fire({
+        position: "center",
+        icon: "Error",
+        title: "We couldn't login",
+        text: `Error : ${error.message}`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    })
   }
 
   const handleGithub = () =>{
     githubLogin()
-    .then(res=>console.log(res))
-    .catch((error) => console.log(error.message))
+    .then(res=>{
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Login Success",
+        showConfirmButton: false,
+        timer: 1500
+      }).then(()=>{
+        navigate(location?.state ? location.state : '/')
+      })
+    })
+    .catch((error) => {
+      Swal.fire({
+        position: "center",
+        icon: "Error",
+        title: "We couldn't login",
+        text: `Error : ${error.message}`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    })
   }
 
   return (

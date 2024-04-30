@@ -5,27 +5,48 @@ import { useForm } from "react-hook-form";
 // import { useState } from "react";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const location = useLocation()
+  const navigate = useNavigate()
+
   const { createUser, updateUserAfterRegister, googleSignin ,githubLogin} =
     useContext(AuthContext);
   // validate Pw
-  // const validatePassword = (password) => {
-  //   Regular expressions to check for uppercase, lowercase, and minimum length
-  //   const uppercaseRegex = /[A-Z]/;
-  //   const lowercaseRegex = /[a-z]/;
-  //   const lengthRegex = /.{6,}/;
+  const validatePassword = (password) => {
+    // Regular expressions to check for uppercase, lowercase, and minimum length
+    const uppercaseRegex = /[A-Z]/;
+    const lowercaseRegex = /[a-z]/;
+    const lengthRegex = /.{6,}/;
 
-  //   if (!uppercaseRegex.test(password)) {
-  //     return toast("Password must contain at least one uppercase letter.");
-  //   } else if (!lowercaseRegex.test(password)) {
-  //     return toast("Password must contain at least one lowercase letter.");
-  //   } else if (!lengthRegex.test(password)) {
-  //     return toast("Password must be at least 6 characters long.");
-  //   }
-  // };
+    if (!uppercaseRegex.test(password)) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password must contain at least one uppercase letter.",
+        // footer: '<a href="#">Why do I have this issue?</a>'
+      });
+      
+    } else if (!lowercaseRegex.test(password)) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password must contain at least one lowercase letter.",
+        // footer: '<a href="#">Why do I have this issue?</a>'
+      });
+    } else if (!lengthRegex.test(password)) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password must be at least 6 characters long.",
+        // footer: '<a href="#">Why do I have this issue?</a>'
+      });
+    }
+  };
 
   const {
     register,
@@ -41,31 +62,78 @@ const Register = () => {
     const password = data.password;
 
     console.log(name, photoURL, email, password);
-    //   validatePassword(password);
+      validatePassword(password);
     // user with email
     createUser(email, password)
       .then(() => {
         //  update user
         updateUserAfterRegister(name, photoURL).then(() => {
-          console.log("update success");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your registration is completed",
+            showConfirmButton: false,
+            timer: 1500
+          })
+          .then(()=>{
+            navigate(location?.state ? location.state : '/')
+          })
         });
       })
       .catch((error) => {
-        console.log(error.message);
+        
       });
   };
 
   const handleGoogleLogin = () =>{
     console.log("Clicked")
     googleSignin()
-    .then(res=>console.log(res))
-    .catch((error) => console.log(error.message))
+    .then(res=>{
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Your registration is completed",
+        showConfirmButton: false,
+        timer: 1500
+      }).then(()=>{
+        navigate(location?.state ? location.state : '/')
+      })
+    })
+    .catch((error) => {
+      Swal.fire({
+        position: "center",
+        icon: "Error",
+        title: "We couldn't login",
+        text: `Error : ${error.message}`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    })
   }
 
   const handleGithub = () =>{
     githubLogin()
-    .then(res=>console.log(res))
-    .catch((error) => console.log(error.message))
+    .then(res=>{
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Your registration is completed",
+        showConfirmButton: false,
+        timer: 1500
+      }).then(()=>{
+        navigate(location?.state ? location.state : '/')
+      })
+    })
+    .catch((error) => {
+      Swal.fire({
+        position: "center",
+        icon: "Error",
+        title: "We couldn't login",
+        text: `Error : ${error.message}`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    })
   }
 
   return (
