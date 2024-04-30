@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MyListCard = ({ item }) => {
   const {
@@ -15,6 +16,22 @@ const MyListCard = ({ item }) => {
     User_Email,
     User_Name,
   } = item;
+
+  const handleDelete = _id => {
+    console.log("clicked handledel", _id)
+
+    fetch(`http://localhost:5000/allitems/${_id}`,{
+        method: "DELETE"
+    })
+    .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Your Coffee has been deleted.", "success");
+            }
+            
+          });
+  }
 
   return (
     <div className="card  bg-custom-color-3 drop-shadow-lg">
@@ -46,11 +63,11 @@ const MyListCard = ({ item }) => {
               Update
             </button>
           </Link>
-          <Link to={`/allitems/${_id}`}>
-            <button className="btn w-full bg-red-400 text-white mt-2 text-lg hover:bg-red-400/[.9]">
+          
+            <button onClick={()=>handleDelete(_id)} className="btn w-full bg-red-400 text-white mt-2 text-lg hover:bg-red-400/[.9]">
               Delete
             </button>
-          </Link>
+          
         </div>
       </div>
     </div>
