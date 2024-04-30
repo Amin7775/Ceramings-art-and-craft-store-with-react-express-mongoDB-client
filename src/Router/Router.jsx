@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         {
           path: '/allitems',
           element: <AllItems></AllItems>,
-          loader: ()=>fetch('http://localhost:5000/allitems')
+          loader: ()=>fetch(' https://ceramings-server.vercel.app/allitems')
         },
         {
           path: '/additem',
@@ -46,18 +46,18 @@ const router = createBrowserRouter([
         {
           path: `/allitems/:id`,
           element: <PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
-          loader: ({params})=>fetch(`http://localhost:5000/allitems/${params.id}`)
+          loader: ({params})=>fetch(` https://ceramings-server.vercel.app/allitems/${params.id}`)
         },
         {
           path:`/update/:id`,
           element: <PrivateRoute><UpdatePage></UpdatePage></PrivateRoute>,
-          loader: ({params}) => fetch(`http://localhost:5000/allitems/${params.id}`)
+          loader: ({params}) => fetch(` https://ceramings-server.vercel.app/allitems/${params.id}`)
         },
         {
           // show data based on subcategory
           path: `/subcategory/:subcategory`,
           element: <SubCategory></SubCategory>,
-          loader: ()=>fetch(`http://localhost:5000/allitems`)
+          loader: ()=>fetch(` https://ceramings-server.vercel.app/allitems`)
         }
       ]
     },

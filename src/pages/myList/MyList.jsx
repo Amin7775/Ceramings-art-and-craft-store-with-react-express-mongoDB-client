@@ -11,7 +11,7 @@ const MyList = () => {
     const [savedData,setSavedData] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:5000/allitems')
+        fetch(' https://ceramings-server.vercel.app/allitems')
         .then(res => res.json())
         .then(data => setSavedData(data))
     },[])

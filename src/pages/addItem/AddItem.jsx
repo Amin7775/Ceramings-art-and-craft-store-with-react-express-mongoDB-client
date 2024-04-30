@@ -18,7 +18,7 @@ const AddItem = () => {
     console.log(formData);
 
     fetch(
-      "http://localhost:5000/allitems",
+      " https://ceramings-server.vercel.app/allitems",
       {
         method: "POST",
         headers: {

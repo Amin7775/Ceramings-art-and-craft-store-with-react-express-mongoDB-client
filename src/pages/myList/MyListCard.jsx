@@ -29,7 +29,7 @@ const MyListCard = ({ item,savedData,setSavedData }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/allitems/${_id}`, {
+        fetch(` https://ceramings-server.vercel.app/allitems/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

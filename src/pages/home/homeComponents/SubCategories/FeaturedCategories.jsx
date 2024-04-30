@@ -6,7 +6,7 @@ const FeaturedCategories = () => {
     const [subCategories,setSubCategories] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:5000/subCategories')
+        fetch(' https://ceramings-server.vercel.app/subCategories')
         .then(res => res.json())
         .then(data => setSubCategories(data))
     },[])

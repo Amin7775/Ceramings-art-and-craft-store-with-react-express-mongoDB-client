@@ -22,7 +22,7 @@ const UpdatePage = () => {
     const formData = data;
     console.log(formData);
 
-    fetch(`http://localhost:5000/allitems/${LoadedData._id}`, {
+    fetch(` https://ceramings-server.vercel.app/allitems/${LoadedData._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

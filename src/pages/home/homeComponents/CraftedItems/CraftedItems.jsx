@@ -7,7 +7,7 @@ const CraftedItems = () => {
     const [crafts,setCrafts] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:5000/allitems')
+        fetch(' https://ceramings-server.vercel.app/allitems')
         .then(res => res.json())
         .then(data => setCrafts(data))
     },[])
