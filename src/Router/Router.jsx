@@ -9,6 +9,7 @@ import Register from "../pages/register/Register";
 import PrivateRoute from "./PrivateRoute";
 import ViewDetails from "../pages/viewDetails/ViewDetails";
 import UpdatePage from "../pages/UpdatePage/UpdatePage";
+import SubCategory from "../pages/subCategory/SubCategory";
 
 const router = createBrowserRouter([
     {
@@ -49,6 +50,12 @@ const router = createBrowserRouter([
           path:`/update/:id`,
           element: <PrivateRoute><UpdatePage></UpdatePage></PrivateRoute>,
           loader: ({params}) => fetch(`http://localhost:5000/allitems/${params.id}`)
+        },
+        {
+          // show data based on subcategory
+          path: `/subcategory/:subcategory`,
+          element: <SubCategory></SubCategory>,
+          loader: ()=>fetch(`http://localhost:5000/allitems`)
         }
       ]
     },

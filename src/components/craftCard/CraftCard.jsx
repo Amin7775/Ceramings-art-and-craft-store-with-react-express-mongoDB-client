@@ -15,7 +15,7 @@ const CraftCard = ({item}) => {
       </figure>
       <div className="card-body items-start text-center">
         <h2 className="card-title">{item_Name}</h2>
-        <p className="text-lg mt-2"><span className="font-medium">Category : </span> {subcategory_Name}</p>
+        <p className="text-lg mt-2 text-start"><span className="font-medium">Category : </span> {subcategory_Name}</p>
         {/* <p className="text-lg "><span className="font-medium">Rating : </span> {rating} out of 5</p> */}
         <p className="text-lg "><span className="font-medium">Price : </span> {price} taka</p>
         <div className="w-full">

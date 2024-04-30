@@ -64,7 +64,7 @@ const FeaturedSlider = ({ subCategories }) => {
             <div className="absolute bg-black opacity-50 inset-y-0 inset-x-4 rounded-3xl"></div>
             <div className="absolute z-10 bottom-12 drop-shadow-2xl w-[90%] px-1 text-center ">
               <div className="h-full w-full flex flex-col items-center justify-center">
-                <Link to={`/allitems/${singleCategory.subcategoryTitle}`}>
+                <Link to={`/subcategory/${singleCategory.subcategoryTitle}`}>
                   <h3 className="text-white text-2xl font-medium">
                     {singleCategory.subcategoryTitle}
                   </h3>
