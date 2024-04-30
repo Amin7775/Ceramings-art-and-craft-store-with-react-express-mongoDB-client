@@ -32,7 +32,7 @@ const MyList = () => {
             :
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 my-10">
                 {
-                    filterEmail?.map(item => <MyListCard key={item._id} item={item}></MyListCard>)
+                    filterEmail?.map(item => <MyListCard key={item._id} item={item} savedData={savedData} setSavedData={setSavedData}></MyListCard>)
                 }
             </div>    
         }

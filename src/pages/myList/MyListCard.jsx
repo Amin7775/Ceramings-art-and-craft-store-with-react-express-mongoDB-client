@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const MyListCard = ({ item }) => {
+const MyListCard = ({ item,savedData,setSavedData }) => {
   const {
     _id,
     item_Name,
@@ -44,6 +44,8 @@ const MyListCard = ({ item }) => {
                 timer: 2000,
               });
             }
+            const remaining = savedData?.filter(singleData => singleData._id != _id)
+            setSavedData(remaining)
           });
       }
     });
