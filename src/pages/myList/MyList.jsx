@@ -16,6 +16,8 @@ const MyList = () => {
         .then(data => setSavedData(data))
     },[])
 
+    
+
     const filterEmail = savedData?.filter(singleData => singleData.User_Email == userEmail)
     console.log(filterEmail)
 
@@ -24,11 +26,11 @@ const MyList = () => {
             <CommonTitle text={"My Lists"}></CommonTitle>
 
             {filterEmail.length == 0 ? 
-            <div className="h-full w-full flex items-center justify-center">
+            <div className="h-full w-full flex items-center justify-center mt-10">
                 <p>You have not added any items yet!</p>
             </div>
             :
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 my-10">
                 {
                     filterEmail?.map(item => <MyListCard key={item._id} item={item}></MyListCard>)
                 }
