@@ -6,6 +6,7 @@ import AddItem from "../pages/addItem/AddItem";
 import MyList from "../pages/myList/MyList";
 import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -22,11 +23,11 @@ const router = createBrowserRouter([
         },
         {
           path: '/additem',
-          element: <AddItem></AddItem>
+          element: <PrivateRoute><AddItem></AddItem></PrivateRoute>
         },
         {
           path: '/mylist',
-          element: <MyList></MyList>
+          element: <PrivateRoute><MyList></MyList></PrivateRoute>
         },
         {
           path: '/login',
