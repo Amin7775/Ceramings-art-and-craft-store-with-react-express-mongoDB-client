@@ -3,6 +3,7 @@ import "./Navbar.css";
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -47,7 +48,7 @@ const Navbar = () => {
     });
   };
 
-  console.log(user)
+  console.log(user);
   return (
     <div className="navbar bg-base-100 drop-shadow-md sticky py-4">
       <div className="navbar-start">
@@ -91,14 +92,20 @@ const Navbar = () => {
       <div className="navbar-end flex gap-1">
         {user ? (
           <>
-            <div className="avatar">
+            <div
+              className="avatar cursor-pointer"
+              data-tooltip-id="my-tooltip"
+              data-tooltip-content={user?.displayName}
+              data-tooltip-place="left"
+            >
               <div className="w-10 rounded-full ring ring-custom-color-1 ring-offset-base-100 ring-offset-2 mr-3">
-                
-                <img src={
-                      user.photoURL
-                        ? `${user.photoURL}`
-                        : "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                    } />
+                <img
+                  src={
+                    user.photoURL
+                      ? `${user.photoURL}`
+                      : "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                  }
+                />
               </div>
             </div>
             <p
@@ -123,6 +130,7 @@ const Navbar = () => {
           </>
         )}
       </div>
+      <Tooltip id="my-tooltip" />
     </div>
   );
 };
