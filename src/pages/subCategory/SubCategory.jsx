@@ -2,6 +2,7 @@ import { useLoaderData, useParams } from "react-router-dom";
 import CraftCard from "../../components/craftCard/CraftCard";
 import CommonTitle from "../../components/commonTitle/CommonTitle";
 import { useEffect, useState } from "react";
+import SubCategoryCard from "./SubCategoryCard";
 
 const SubCategory = () => {
   const loadedData = useLoaderData();
@@ -39,7 +40,7 @@ const SubCategory = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 my-10 px-5">
           {filterData?.map((item) => (
-            <CraftCard key={item._id} item={item}></CraftCard>
+            <SubCategoryCard key={item._id} item={item}></SubCategoryCard>
           ))}
         </div>
       )}
