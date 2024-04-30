@@ -19,7 +19,8 @@ const ViewDetails = () => {
                 <div className="flex-1 px-7 py-5 md:p-16 lg:p-0">
                 <h1 className="mt-2 text-4xl font-medium">{item_Name}</h1>
                 <h1 className="mt-5 text-xl font-medium">Type : {subcategory_Name}</h1>
-                <div className="flex gap-1 mt-5 items-center">
+                <p className="mt-2 text-xl font-medium">By : {User_Name} </p>
+                <div className="flex gap-1 mt-4 items-center">
                 <FaStar className="text-orange-400"></FaStar>
                 <FaStar className="text-orange-400"></FaStar>
                 <FaStar className="text-orange-400"></FaStar>
@@ -39,6 +40,7 @@ const ViewDetails = () => {
                 <p className="text-lg  text-slate-500">Stock Status : {stockStatus}</p>
                 <p className="text-lg  text-slate-500">Processing Time : {processing_Time} Days</p>
                 </div>  
+                
                 {/* btn */}
                 <div className="mt-5">
                     <button className="btn bg-custom-color-1 text-white text-lg py-2 w-full">ADD TO CART</button>
