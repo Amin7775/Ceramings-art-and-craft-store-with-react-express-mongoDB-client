@@ -7,6 +7,7 @@ import MyList from "../pages/myList/MyList";
 import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
 import PrivateRoute from "./PrivateRoute";
+import ViewDetails from "../pages/viewDetails/ViewDetails";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,11 @@ const router = createBrowserRouter([
         {
           path: '/register',
           element: <Register></Register>
+        },
+        {
+          path: `/allitems/:id`,
+          element: <ViewDetails></ViewDetails>,
+          loader: ({params})=>fetch(`http://localhost:5000/allitems/${params.id}`)
         }
       ]
     },

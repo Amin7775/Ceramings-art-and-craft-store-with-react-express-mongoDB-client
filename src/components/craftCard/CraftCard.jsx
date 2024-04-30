@@ -19,7 +19,7 @@ const CraftCard = ({item}) => {
         {/* <p className="text-lg "><span className="font-medium">Rating : </span> {rating} out of 5</p> */}
         <p className="text-lg "><span className="font-medium">Price : </span> {price} taka</p>
         <div className="w-full">
-            <Link to={`http://localhost:5000/allitems/${_id}`}>
+            <Link to={`/allitems/${_id}`}>
           <button className="btn w-full bg-custom-color-1 text-white mt-2 text-lg hover:bg-custom-color-1/[.9]">View Details</button>
             </Link>
         
