@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const AddItem = () => {
   const { user } = useContext(AuthContext);
@@ -8,6 +9,7 @@ const AddItem = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -26,8 +28,21 @@ const AddItem = () => {
       }
     )
       .then((res) => res.json())
-      .then((data) => {console.log(data)
-      window.location.reload()
+      .then((data) => {
+        console.log(data)
+        if(data.acknowledged == true){
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "You have successfully added a new craft",
+            showConfirmButton: false,
+            timer: 2000
+          })
+          .then(()=>{
+            reset()
+          })
+        }
+        // Swal.fire("Added!", "Your Item has been deleted.", "success");
       });
   };
   // console.log("insider");/

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UpdatePage = () => {
   const { user } = useContext(AuthContext);
@@ -13,6 +14,7 @@ const UpdatePage = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -30,7 +32,19 @@ const UpdatePage = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        
+        if(data.acknowledged == true){
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "You have successfully Updated this item",
+            showConfirmButton: false,
+            timer: 2000
+          })
+          .then(()=>{
+            window.location.reload()
+
+          })
+        }
       });
   };
   return (

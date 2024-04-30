@@ -17,21 +17,37 @@ const MyListCard = ({ item }) => {
     User_Name,
   } = item;
 
-  const handleDelete = _id => {
-    console.log("clicked handledel", _id)
-
-    fetch(`http://localhost:5000/allitems/${_id}`,{
-        method: "DELETE"
-    })
-    .then((res) => res.json())
+  const handleDelete = (_id) => {
+    console.log("clicked handledel", _id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/allitems/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
           .then((data) => {
             console.log(data);
             if (data.deletedCount > 0) {
-              Swal.fire("Deleted!", "Your Coffee has been deleted.", "success");
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "You have successfully Deleted a new craft",
+                showConfirmButton: false,
+                timer: 2000,
+              });
             }
-            
           });
-  }
+      }
+    });
+  };
 
   return (
     <div className="card  bg-custom-color-3 drop-shadow-lg">
@@ -63,11 +79,13 @@ const MyListCard = ({ item }) => {
               Update
             </button>
           </Link>
-          
-            <button onClick={()=>handleDelete(_id)} className="btn w-full bg-red-400 text-white mt-2 text-lg hover:bg-red-400/[.9]">
-              Delete
-            </button>
-          
+
+          <button
+            onClick={() => handleDelete(_id)}
+            className="btn w-full bg-red-400 text-white mt-2 text-lg hover:bg-red-400/[.9]"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>
