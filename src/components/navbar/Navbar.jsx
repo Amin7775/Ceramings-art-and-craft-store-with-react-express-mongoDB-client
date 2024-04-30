@@ -5,8 +5,8 @@ import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const { user,logOut } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
   const links = (
     <>
       <li>
@@ -24,7 +24,7 @@ const Navbar = () => {
     </>
   );
 
-  const handleLogOut = () =>{
+  const handleLogOut = () => {
     Swal.fire({
       title: "Confirm logout?",
       text: "You won't be able to revert this!",
@@ -32,21 +32,22 @@ const Navbar = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes"
+      confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
           title: "Logged Out!",
           text: "Redirecting to the home page",
-          icon: "success"
-        })
-        .then(()=>{
-          logOut()
-          navigate('/')
-        })
+          icon: "success",
+        }).then(() => {
+          logOut();
+          navigate("/");
+        });
       }
     });
-  }
+  };
+
+  console.log(user)
   return (
     <div className="navbar bg-base-100 drop-shadow-md sticky py-4">
       <div className="navbar-start">
@@ -90,11 +91,22 @@ const Navbar = () => {
       <div className="navbar-end flex gap-1">
         {user ? (
           <>
-            <Link to={"/login"}>
-              <p onClick={handleLogOut} className="btn bg-custom-color-1 text-white hover:bg-custom-color-1/[.9] px-4 md:px-6 lg:px-10 md:text-lg">
-                Logout
-              </p>
-            </Link>
+            <div className="avatar">
+              <div className="w-10 rounded-full ring ring-custom-color-1 ring-offset-base-100 ring-offset-2 mr-3">
+                
+                <img src={
+                      user.photoURL
+                        ? `${user.photoURL}`
+                        : "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                    } />
+              </div>
+            </div>
+            <p
+              onClick={handleLogOut}
+              className="btn bg-custom-color-1 text-white hover:bg-custom-color-1/[.9] px-4 md:px-6 lg:px-10 md:text-lg"
+            >
+              Logout
+            </p>
           </>
         ) : (
           <>

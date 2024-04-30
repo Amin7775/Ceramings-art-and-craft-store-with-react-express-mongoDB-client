@@ -65,6 +65,7 @@ const Login = () => {
         timer: 1500
       }).then(()=>{
         navigate(location?.state ? location.state : '/')
+        // window.location.reload()
       })
     })
     .catch((error) =>{
@@ -190,7 +191,7 @@ const Login = () => {
                   className="bg-transparent btn hover:bg-[#F0F0F0] text-base md:text-xl font-normal py-3 drop-shadow-sm h-full border-slate-300"
                 >
                   <FcGoogle></FcGoogle>
-                  Register with Google
+                  Login with Google
                 </button>
                 {/* twitter */}
                 <button
@@ -198,7 +199,7 @@ const Login = () => {
                   className="bg-transparent btn hover:bg-[#F0F0F0]  text-base md:text-xl font-normal py-3 drop-shadow-sm h-full border-slate-300"
                 >
                   <FaGithub></FaGithub>
-                  Register with Github
+                  Login with Github
                 </button>
               </div>
             </div>
