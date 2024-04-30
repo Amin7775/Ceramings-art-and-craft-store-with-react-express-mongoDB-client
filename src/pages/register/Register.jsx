@@ -1,12 +1,16 @@
-import { FaRegEye, FaRegEyeSlash, FaTwitter } from "react-icons/fa6";
+import { FaGithub, FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import RegisterTopText from "./RegisterComponents/RegisterTopText";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+// import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const { createUser, updateUserAfterRegister, googleSignin ,githubLogin} =
+    useContext(AuthContext);
   // validate Pw
   // const validatePassword = (password) => {
   //   Regular expressions to check for uppercase, lowercase, and minimum length
@@ -26,7 +30,7 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
   } = useForm();
 
@@ -38,9 +42,31 @@ const Register = () => {
 
     console.log(name, photoURL, email, password);
     //   validatePassword(password);
+    // user with email
+    createUser(email, password)
+      .then(() => {
+        //  update user
+        updateUserAfterRegister(name, photoURL).then(() => {
+          console.log("update success");
+        });
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
-  const handleGoogleLogin = () => {};
-  const handleTwitter = () => {};
+
+  const handleGoogleLogin = () =>{
+    console.log("Clicked")
+    googleSignin()
+    .then(res=>console.log(res))
+    .catch((error) => console.log(error.message))
+  }
+
+  const handleGithub = () =>{
+    githubLogin()
+    .then(res=>console.log(res))
+    .catch((error) => console.log(error.message))
+  }
 
   return (
     <div className="min-h-screen bg-[#F4EDE8] pb-12">
@@ -150,13 +176,13 @@ const Register = () => {
                   <FcGoogle></FcGoogle>
                   Register with Google
                 </button>
-                {/* twitter */}
+                {/* github */}
                 <button
-                  onClick={handleTwitter}
+                  onClick={handleGithub}
                   className="bg-transparent btn hover:bg-[#F0F0F0]  text-base md:text-xl font-normal py-3 drop-shadow-sm h-full border-slate-300"
                 >
-                  <FaTwitter className="text-[#4D9EF1]"></FaTwitter>
-                  Register with twitter
+                  <FaGithub></FaGithub>
+                  Register with Github
                 </button>
               </div>
             </div>

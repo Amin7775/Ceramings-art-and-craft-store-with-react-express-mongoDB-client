@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaRegEye, FaRegEyeSlash, FaTwitter } from "react-icons/fa6";
+import { FaGithub, FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import LoginTopText from "./loginComponents/LoginTopText";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
 
+    const { loginUser, googleSignin ,githubLogin} =
+    useContext(AuthContext);
   // validate Pw
   // const validatePassword = (password) => {
   //   Regular expressions to check for uppercase, lowercase, and minimum length
@@ -26,7 +29,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
   } = useForm();
 
@@ -36,9 +39,22 @@ const Login = () => {
 
     console.log( email, password);
     //   validatePassword(password);
+    loginUser(email,password)
+    .then(res => console.log(res.user))
+    .catch(error => console.log(error.message))
   };
-  const handleGoogleLogin = () => {};
-  const handleTwitter = () => {};
+  const handleGoogleLogin = () =>{
+    console.log("Clicked")
+    googleSignin()
+    .then(res=>console.log(res))
+    .catch((error) => console.log(error.message))
+  }
+
+  const handleGithub = () =>{
+    githubLogin()
+    .then(res=>console.log(res))
+    .catch((error) => console.log(error.message))
+  }
 
   return (
     <div className="min-h-screen bg-[#F4EDE8] pb-12">
@@ -130,11 +146,11 @@ const Login = () => {
                 </button>
                 {/* twitter */}
                 <button
-                  onClick={handleTwitter}
+                  onClick={handleGithub}
                   className="bg-transparent btn hover:bg-[#F0F0F0]  text-base md:text-xl font-normal py-3 drop-shadow-sm h-full border-slate-300"
                 >
-                  <FaTwitter className="text-[#4D9EF1]"></FaTwitter>
-                  Register with twitter
+                  <FaGithub></FaGithub>
+                  Register with Github
                 </button>
               </div>
             </div>

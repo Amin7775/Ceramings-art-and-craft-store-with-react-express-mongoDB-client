@@ -48,7 +48,7 @@ const Navbar = () => {
         <Link to={'/login'}>
         <p className="btn bg-custom-color-1 text-white hover:bg-custom-color-1/[.9] px-4 md:px-6 lg:px-10 md:text-lg">Login</p>
         </Link>
-        <Link to={'/login'}>
+        <Link to={'/register'}>
         <p className="btn bg-custom-color-1 text-white hover:bg-custom-color-1/[.9] px-4 md:px-6 lg:px-10 md:text-lg">Register</p>
         </Link>
       </div>
